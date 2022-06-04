@@ -51,6 +51,7 @@ main:
 
 loop:	slt $t2, $s3, $s0				# t2 = (i < number of student) ? 1 : 0
 		beq	$t2, $zero, end_loop		# nếu t2 = 0 kết thúc vòng lặp
+		nop
 		mul $t3, $s3, $t0				# t3 = i * 4 : khoảng cách từ studentMark[0] đến studentMark[i]
 		mul $t4, $s3, $t1				# t4 = i * 32 : khoảng cách từ studentName[0] đến studentName[i]
 		add $t5, $s1, $t3				# t5 = &studentMark[i]
@@ -59,14 +60,18 @@ loop:	slt $t2, $s3, $s0				# t2 = (i < number of student) ? 1 : 0
 
 		l.s $f1, 0($t5)					# f1 = studentMark[i]
 		jal compare
+		nop
 		
 	 	beq $v0, $zero, loop			# if $v0 == 0; studentMark[i] < minScore, bỏ qua sinh viên
+		nop
 
 		# in sinh viên thoả mãn ra console
 		move $a0, $t5			
 		move $a1, $t6
 		jal print						
+		nop
 		j loop
+		nop
 end_loop:
 	# Kết thúc chương trình 
 	li $v0, 10
@@ -118,5 +123,5 @@ compare:
 	li $t9, 1
 	movt $t8, $t9			# if flag == 1, $t8 = $t9 
 	add $v0, $t8, $zero
-	jr $ra
+	jr $ra	
 .end compare
