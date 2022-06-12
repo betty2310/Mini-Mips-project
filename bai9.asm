@@ -62,7 +62,7 @@ loop:	slt $t2, $s3, $s0				# t2 = (i < number of student) ? 1 : 0
 		jal compare
 		nop
 		
-	 	beq $v0, $zero, loop			# if $v0 == 0; studentMark[i] < minScore, bỏ qua sinh viên
+	 	bne $v0, $zero, loop			# if $v0 == 0; studentMark[i] < minScore, bỏ qua sinh viên
 		nop
 
 		# in sinh viên thoả mãn ra console
